@@ -1,0 +1,146 @@
+/*
+* File: Headphone.java
+* Author: Hunter Cory
+* Date: Feb. 17, 2018
+* Purpose: Homework 3 
+*/
+
+import java.util.Scanner;
+
+public class HeadphoneHW3 {
+
+public static class SetupHeadphones {
+	int volume;
+	String userAns, brand, color, pluggedIn, useHeadphones, volumeAns, colorAns, brandAns;
+
+	//default constructor
+public SetupHeadphones() {
+	
+	brand = "JBL";
+	color = "White";
+	useHeadphones = "Y";
+	volume = 5;
+	}
+public void Input() {
+	Scanner input = new Scanner(System.in);
+	System.out.print("Do you want to use your headphones? (Y or N): ");
+	pluggedIn = input.nextLine();
+	pluggedIn = pluggedIn.toUpperCase(); //make user input upper case avoid problems. 
+}
+
+public void getuseHeadphones() {
+	Scanner useInput = new Scanner(System.in);
+	
+	switch(useHeadphones){
+		case "Y": System.out.print("Are your headphones plugged in? (Y or N): ");
+		          userAns = useInput.nextLine();
+		          userAns = userAns.toUpperCase();
+		          break;
+		case "N": break;
+		default: System.out.print("Invalid reply");
+	}
+}
+
+//method ask change volume. exit not plugged in
+public void getpluggedIn() {
+	Scanner powerInput = new Scanner(System.in);
+	
+	switch(userAns){
+		case "Y": System.out.print("Would you like to change the volume? (Y or N): ");
+				  volumeAns = powerInput.nextLine();
+				  volumeAns = volumeAns.toUpperCase();
+				  System.out.print("What volume would you like your headphones at? (1 to 10): ");
+				  volume = powerInput.nextInt();
+				  pluggedIn = "plugged in";
+				  break;
+		case "N": pluggedIn = "not plugged in. Please try again.";
+				  break;
+		default: System.out.print("Invalid reply");
+	}
+}
+
+public void getcolor() {
+    Scanner colorInput = new Scanner(System.in);
+    
+    switch(volumeAns){
+            case "Y": System.out.print("Would you like to save the color of your headphones? (Y or N): ");
+                              colorAns = colorInput.nextLine();
+                              colorAns = colorAns.toUpperCase();
+                              System.out.print("What color are your headphones? (Red, White, or Blue): ");
+                              color = colorInput.nextLine();
+                              color = color.toUpperCase();
+                              pluggedIn = "plugged in";
+                              break;
+            case "RED": System.out.print("Your headphones are Red");
+            case "WHITE":System.out.print("Your headphones are White");
+            case "BLUE": System.out.print("Your headphones are Blue");
+            case "N": pluggedIn = "not plugged in";
+                              break;
+            default: System.out.print("Invalid Reply");
+    }
+}
+
+public void getbrand(){
+    Scanner brandInput = new Scanner(System.in);
+    
+    switch(colorAns){
+        case "Y": System.out.print("Would you like to save the brand of your headphones? (Y or N): ");
+                          brandAns = brandInput.nextLine();
+                          brandAns = brandAns.toUpperCase();
+                          System.out.print("What is the brand of your headphones? (Sony, JBL, Apple, or Beats): ");
+                          brand = brandInput.nextLine();
+                          brand = brand.toUpperCase();
+                          pluggedIn = "plugged In";
+                          break;
+        case "SONY": System.out.print("The brand of your headphones are Sony");
+        case "JBL": System.out.print("The brand of your headphones are JBL"); 
+        case "APPLE": System.out.print("The brand of your headphones are Apple");
+        case "BEATS": System.out.print("The brand of your headphones are Beats");
+        case "N": pluggedIn = "not plugged in";
+                          break;
+        default: System.out.print("Invalid Reply");
+    }
+}
+public void results() {
+	getuseHeadphones();
+	getpluggedIn();
+        getcolor();
+        getbrand();
+	
+	switch(useHeadphones) {
+		case "Y": switch(userAns) {
+					case "Y": System.out.printf("Your headphones are %s, the volume is set to %d, the color is set to %s,the brand is set to %s\n", pluggedIn, volume, color, brand);
+							  break;
+					case "N": System.out.printf("Your headphones are %s\n", pluggedIn);
+							  break;
+				}
+                                                          break;
+		case "N": System.out.println("Thank you, Try again");
+                                                          break;
+		default: System.out.println("Invaild input");
+		}
+	}
+}
+
+public static void main(String[] args) {
+	Scanner check = new Scanner (System.in);
+	int end = 1;
+	
+	SetupHeadphones sethead = new SetupHeadphones();
+	
+	while (true) {
+		sethead.Input();
+		sethead.results();
+		
+		System.out.println("Do you want to enter more values? (Press 0 to end) ");
+		end = check.nextInt();
+		
+		if(end == 0) {
+			break;
+			}
+		}
+	
+	}
+}
+
+
